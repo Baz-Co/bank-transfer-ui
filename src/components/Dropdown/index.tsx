@@ -12,9 +12,10 @@ type IProps = {
   label?: string,
   onChange: (item: IAccounts) => void,
   items?: IAccounts[],
+  onBlur?: () => void
 }
 
-export const Dropdown: React.FC<IProps> = ({ label, onChange, items }) => { 
+export const Dropdown: React.FC<IProps> = ({ label, onChange, items, onBlur }) => { 
   return (
     <Downshift
       onChange={onChange}
@@ -39,6 +40,7 @@ export const Dropdown: React.FC<IProps> = ({ label, onChange, items }) => {
             placeholder="Select an Account"
             onFocus={()=>{openMenu()}}
             style={{padding: '5px', width: '100%'}}
+            onBlur={onBlur}
           />
           <div className="Dropdown__Panel">
             <ul {...getMenuProps()} style={{width: '100%'}}>

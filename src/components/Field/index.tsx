@@ -1,10 +1,11 @@
 import * as React from "react";
 
+import { Dropdown } from "../Dropdown";
 import { Label } from "../Label";
 import { Input } from "../Input";
 import { IFormContext, FormContext } from "../Form";
 
-import './Field.css'
+import "./Field.css";
 
 import { IFieldProps, IErrors } from "../../types";
 
@@ -34,6 +35,7 @@ export const Field: React.FC<IFieldProps> = ({
               onChange={(e: React.FormEvent<HTMLInputElement>) =>
                 context.setValues({ [id]: e.currentTarget.value })
               }
+              // onBlur={() => console.log('blurred')}
               onBlur={() => context.validate(id)}
               className="form-control"
               style={getEditorStyle(context.errors)}
@@ -54,24 +56,29 @@ export const Field: React.FC<IFieldProps> = ({
           )}
 
           {editor!.toLowerCase() === "dropdown" && (
-            <select
-              id={id}
-              name={id}
-              value={value}
-              onChange={(e: React.FormEvent<HTMLSelectElement>) =>
+            <Dropdown
+              onChange={item => context.setValues({ [id]: item })}
+              items={options && options.filter(account => account.name)}
+              onBlur={() => context.validate(id)}
+            />
+          )}
+
+          {editor!.toLowerCase() === "number" && (
+            <input
+              title="Enter a financial value (ex: 200, 123.45)"
+              type="number"
+              step=".01"
+              pattern="/\D[^\.]/g"
+              id="transfer-amount"
+              placeholder="Enter Transfer Amount"
+              autoComplete="off"
+              className={`width100pct`}
+              style={{ marginBottom: '2px'}}
+              onChange={(e: React.FormEvent<HTMLInputElement>) =>
                 context.setValues({ [id]: e.currentTarget.value })
               }
               onBlur={() => context.validate(id)}
-              className="form-control"
-              style={getEditorStyle(context.errors)}
-            >
-              {options &&
-                options.map(option => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-            </select>
+            />
           )}
 
           {getError(context.errors) && (

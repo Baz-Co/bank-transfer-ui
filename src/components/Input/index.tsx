@@ -5,6 +5,7 @@ import './Input.css'
 interface IInputProps {
   id: string
   type: string
+  // pattern?: string
   value: string
   placeholder?: string
   onChange: (e:React.FormEvent<HTMLInputElement>) => void
@@ -19,6 +20,7 @@ export const Input: React.FC<IInputProps> = ({ id, type, value, placeholder, onC
   return <input
     id={id}
     type={type}
+    // pattern={pattern}
     placeholder={placeholder}
     value={value}
     onChange={onChange}
@@ -26,6 +28,7 @@ export const Input: React.FC<IInputProps> = ({ id, type, value, placeholder, onC
     onBlur={onBlur}
     className={`width100pct ${className}`}
     style={style}
+    autoComplete='off'
   />
 }
 

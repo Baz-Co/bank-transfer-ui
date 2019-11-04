@@ -20,7 +20,7 @@ export interface IValues {
   /* Key value pairs for all the field values with key being the field name */
   [key: string]: any;
 }
-type Editor = "input" | "textarea" | "dropdown";
+type Editor = "input" | "textarea" | "dropdown" | "number";
 interface IValidation {
   rule: (values: IValues, fieldName: string, args: any) => string;
   args?: any;
@@ -29,7 +29,7 @@ export interface IFieldProps {
   id: string;
   label?: string;
   editor?: Editor;
-  options?: string[];
+  options?: IAccounts[];
   value?: any;
   validation?: IValidation;
 }

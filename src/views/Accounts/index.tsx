@@ -16,7 +16,6 @@ interface IState {
   availableBalance: number | null
   presentBalance: number | null
   selectedAccount: IAccounts | null
-  externalAccounts: IAccounts[],
   transactions: ITransactions[]
 };
 
@@ -26,7 +25,6 @@ export class Accounts extends Component<IProps, IState> {
     selectedAccount: null,
     availableBalance: null,
     presentBalance: null,
-    externalAccounts: [],
     transactions: []
   }
 

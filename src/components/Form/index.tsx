@@ -145,7 +145,7 @@ export class Form extends React.Component<IFormProps, IFormState> {
         <form onSubmit={this.handleSubmit} noValidate={true}>
           <div className="container">
             {this.props.render()}
-            <div className="form-group">
+            <div className="form-group form-submit" style={{textAlign: 'center' }}>
               <button
                 type="submit"
                 className="btn btn-primary"
