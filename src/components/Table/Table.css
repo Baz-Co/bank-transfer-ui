@@ -1,0 +1,10 @@
+.ReactTable {
+  outline: 0;
+}
+
+.rt-thead {
+  background-color: var(--color-sky-blue);
+}
+.rt-tr.-odd {
+  background-color: var(--color-lightest-grey);
+}

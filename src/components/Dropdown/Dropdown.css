@@ -1,0 +1,9 @@
+.Dropdown__input {
+  border: 1px solid var(--color-light-grey);
+  background-color: var(--color-lightest-grey);
+}
+
+.Dropdown__Panel {
+  border: 1px solid var(--color-light-grey);
+  border-top: 0;
+}

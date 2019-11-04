@@ -1,22 +1,62 @@
-.App {
-  text-align: center;
+.App-header {
+  height: 10vmin;
+  background-color: var(--color-dark-blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-lighter-grey);
+  padding: 0 var(--base-px);
+  vertical-align: center;
+}
+
+.Logo__Container {
+	display: flex;
+  align-items: center;
+  vertical-align: center;
+  font-weight: bold;
+  
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 6vmin;
+  vertical-align: middle;
+  /* height: 30px; */
+  /* width: 30px; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.App-content {
+  max-width: 768px;
+  margin: auto;
+  background-color: var(--color-lighter-grey);
 }
 
-.App-link {
-  color: #09d3ac;
+nav {
+	display: flex;
+  background-color: var(--color-medium-blue);
+}
+nav:first-child {
+  padding-left: calc(2 * var(--base-px))
+}
+nav:last-child {
+  padding-right: calc(2 * var(--base-px))
+}
+.NavLink {
+  border: 0;
+	box-shadow: none;
+	text-align: center;
+	line-height: calc(7 * var(--base-px));
+	height: calc(7 * var(--base-px));
+	cursor: pointer;
+  /* display: block; */
+  padding: 3px;
+  text-decoration: none;
+}
+
+.NavLink:hover {
+  color: var(--color-teal);
+  border-bottom: 3px solid var(--color-teal);
+}
+
+.NavLink--active {
+  border-bottom: 3px solid var(--color-lighter-grey);
 }
