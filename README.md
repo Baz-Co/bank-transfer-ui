@@ -1,44 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The initial state of this project includes all of the functionality for viewing the accounts and transactions for a client of Bank Inc. 
+The transfer view of the Application is a work in progress - it includes all of the fields necessary for transfer with full data validation, but the feature needs more development and the form has not been fully integrated with the backend system.
 
-## Available Scripts
+To Run the project, clone the repo and run: `yarn start`
 
-In the project directory, you can run:
+The application has been deployed in its current state: [https://glacial-plains-92361.herokuapp.com/accounts](https://glacial-plains-92361.herokuapp.com/accounts)
 
-### `yarn start`
+The backend is a basic non-relational DB + rest API built with Node, Express, and MongoDB. The backend code is in another repo and can be shared upon request. The live service is hosted through mLab and Heroku.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project utilizes a couple of very well developed third-party open source libraries I would like to recognize:
+react-table
+downshift
+react-modal
+Icons and Color Schemes were generated with the SchemeColor and FlatIcons web services.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project was also bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
