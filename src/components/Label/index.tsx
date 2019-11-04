@@ -1,12 +1,12 @@
 import React from "react";
 
 interface IProps {
-  text: string;
+  htmlFor: string
+  children: React.ReactNode
 }
 
-export const Label: React.FC<IProps> = ({ text }) => {
-// export function Label({ text }): IProps {
-  return <label style={{display: 'block'}}>{text}</label>;
+export const Label: React.FC<IProps> = ({ htmlFor, children }) => {
+  return <label htmlFor={htmlFor} style={{display: 'block'}}>{children}</label>;
 }
 
 export default Label;

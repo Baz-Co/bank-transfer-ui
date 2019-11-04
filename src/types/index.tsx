@@ -15,3 +15,28 @@ export interface ITransactions {
   amount: number
   balance: number
 }
+
+export interface IValues {
+  /* Key value pairs for all the field values with key being the field name */
+  [key: string]: any;
+}
+type Editor = "input" | "textarea" | "dropdown";
+interface IValidation {
+  rule: (values: IValues, fieldName: string, args: any) => string;
+  args?: any;
+}
+export interface IFieldProps {
+  id: string;
+  label?: string;
+  editor?: Editor;
+  options?: string[];
+  value?: any;
+  validation?: IValidation;
+}
+export interface IFields {
+  [key: string]: IFieldProps;
+}
+export interface IErrors {
+  /* The validation error messages for each field (key is the field name */
+  [key: string]: string;
+}

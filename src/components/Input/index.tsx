@@ -1,18 +1,21 @@
 import React, { CSSProperties } from "react";
 
-interface IProps {
+import './Input.css'
+
+interface IInputProps {
   id: string
   type: string
   value: string
-  placeholder: string
-  onChange: () => {}
-  onFocus: () => void
-  onBlur: () => {}
-  className: string
-  style: CSSProperties
+  placeholder?: string
+  onChange: (e:React.FormEvent<HTMLInputElement>) => void
+  onFocus?: () => void
+  onBlur?: () => void
+  className?: string
+  style?: CSSProperties
 }
 
-export const Input: React.FC<IProps> = ({ id, type, value, placeholder, onChange, onFocus, onBlur, className, style }) => {
+export const Input: React.FC<IInputProps> = ({ id, type, value, placeholder, onChange, onFocus, onBlur, className, style }) => {
+  
   return <input
     id={id}
     type={type}
@@ -21,7 +24,7 @@ export const Input: React.FC<IProps> = ({ id, type, value, placeholder, onChange
     onChange={onChange}
     onFocus={onFocus}
     onBlur={onBlur}
-    className={className}
+    className={`width100pct ${className}`}
     style={style}
   />
 }

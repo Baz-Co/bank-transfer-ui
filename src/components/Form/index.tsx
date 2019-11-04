@@ -1,55 +1,21 @@
-import * as React from "react";
-import { IFieldProps } from "../Field";
+import * as React from 'react'
+import { IValues, IFields, IErrors } from '../../types'
 
 export interface IFormContext extends IFormState {
-  /* Function that allows values in the values state to be set */
-  setValues: (values: IValues) => void;
-
-  /* Function that validates a field */
-  validate: (fieldName: string) => void;
+  setValues: (values: IValues) => void
+  validate: (fieldName: string) => void
 }
-/* 
- * The context which allows state and functions to be shared with Field.
- * Note that we need to pass createContext a default value which is why undefined is unioned in the type
- */
 export const FormContext = React.createContext<IFormContext | any>(
   undefined
 );
 
-/**
- * Validates whether a field has a value
- * @param {IValues} values - All the field values in the form
- * @param {string} fieldName - The field to validate
- * @returns {string} - The error message
- */
 export const required = (values: IValues, fieldName: string): string =>
   values[fieldName] === undefined ||
   values[fieldName] === null ||
-  values[fieldName] === ""
-    ? "This must be populated"
-    : "";
+  values[fieldName] === ''
+    ? 'This field must be completed.'
+    : ''
 
-/**
- * Validates whether a field is a valid email
- * @param {IValues} values - All the field values in the form
- * @param {string} fieldName - The field to validate
- * @returns {string} - The error message
- */
-export const isEmail = (values: IValues, fieldName: string): string =>
-  values[fieldName] &&
-  values[fieldName].search(
-    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-  )
-    ? "This must be in a valid email format"
-    : "";
-
-/**
- * Validates whether a field is within a certain amount of characters
- * @param {IValues} values - All the field values in the form
- * @param {string} fieldName - The field to validate
- * @param {number} length - The maximum number of characters
- * @returns {string} - The error message
- */
 export const maxLength = (
   values: IValues,
   fieldName: string,
@@ -59,38 +25,15 @@ export const maxLength = (
     ? `This can not exceed ${length} characters`
     : "";
 
-export interface IFields {
-  [key: string]: IFieldProps;
-}
 interface IFormProps {
-  /* The http path that the form will be posted to */
-  action: string;
-
-  /* The props for all the fields on the form */
+  apiPath: string;
   fields: IFields;
-
-  /* A prop which allows content to be injected */
   render: () => React.ReactNode;
 }
 
-export interface IValues {
-  /* Key value pairs for all the field values with key being the field name */
-  [key: string]: any;
-}
-
-export interface IErrors {
-  /* The validation error messages for each field (key is the field name */
-  [key: string]: string;
-}
-
-export interface IFormState {
-  /* The field values */
+interface IFormState {
   values: IValues;
-
-  /* The field validation error messages */
   errors: IErrors;
-
-  /* Whether the form has been successfully submitted */
   submitSuccess?: boolean;
 }
 
@@ -106,19 +49,10 @@ export class Form extends React.Component<IFormProps, IFormState> {
     };
   }
 
-  /**
-   * Stores new field values in state
-   * @param {IValues} values - The new field values
-   */
   private setValues = (values: IValues) => {
     this.setState({ values: { ...this.state.values, ...values } });
   };
 
-  /**
-   * Executes the validation rule for the field and updates the form errors
-   * @param {string} fieldName - The field to validate
-   * @returns {string} - The error message
-   */
   private validate = (fieldName: string): string => {
     let newError: string = "";
 
@@ -139,11 +73,6 @@ export class Form extends React.Component<IFormProps, IFormState> {
     return newError;
   };
 
-  /**
-   * Returns whether there are any errors in the errors object that is passed in
-   * @param {IErrors} errors - The field errors
-   * @returns {boolean} - Whether there are any errors
-   */
   private haveErrors(errors: IErrors) {
     let haveError: boolean = false;
     Object.keys(errors).map((key: string) => {
@@ -154,10 +83,6 @@ export class Form extends React.Component<IFormProps, IFormState> {
     return haveError;
   }
 
-  /**
-   * Handles form submission
-   * @param {React.FormEvent<HTMLFormElement>} e - The form event
-   */
   private handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
@@ -171,10 +96,6 @@ export class Form extends React.Component<IFormProps, IFormState> {
     }
   };
 
-  /**
-   * Executes the validation rules for all the fields on the form and sets the error state
-   * @returns {boolean} - Returns true if the form is valid
-   */
   private validateForm(): boolean {
     const errors: IErrors = {};
     Object.keys(this.props.fields).map((fieldName: string) => {
@@ -184,13 +105,9 @@ export class Form extends React.Component<IFormProps, IFormState> {
     return !this.haveErrors(errors);
   }
 
-  /**
-   * Submits the form to the http api
-   * @returns {boolean} - Whether the form submission was successful or not
-   */
   private async submitForm(): Promise<boolean> {
     try {
-      const response = await fetch(this.props.action, {
+      const response = await fetch(this.props.apiPath, {
         method: "post",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -199,7 +116,6 @@ export class Form extends React.Component<IFormProps, IFormState> {
         body: JSON.stringify(this.state.values)
       });
       if (response.status === 400) {
-        /* Map any validation errors to IErrors */
         let responseBody: any;
         responseBody = await response.json();
         const errors: IErrors = {};

@@ -1,52 +1,32 @@
 import React from "react";
+
 import Modal from "../../components/Modal";
-import { Form, IFields, required, isEmail, maxLength } from "../../components/Form";
+import {
+  Form,
+  required,
+  maxLength
+} from "../../components/Form";
 import { Field } from "../../components/Field";
 
-// export default function Profile() {
-//   return (
-//     <React.Fragment>
-//       <h2>Profile</h2>
+import './AccountInfoModal.css'
 
-//     </React.Fragment>
-//   )
-// }
+import { IFields } from "../../types";
 
-type Props = {};
+type IProfileProps = {};
 
-// export const Profile: React.FC<Props> = () => {
-//   return (
-//     <React.Fragment>
-//       <h2>Profile</h2>
-//       <Modal isOpen={false}>
-//         <div>
-//           <div>I am a modal</div>
-//           <form>
-//             <input />
-//             <button>tab navigation</button>
-//             <button>stays</button>
-//             <button>inside</button>
-//             <button>the modal</button>
-//           </form>
-//         </div>
-//       </Modal>
-//     </React.Fragment>
-//   );
-// };
-
-type State = {
+type IProfileState = {
   isOpen: boolean;
   value: string | null;
 };
 
-export class Profile extends React.Component<Props, State> {
-  constructor(props: Props) {
+export class Profile extends React.Component<IProfileProps, IProfileState> {
+  constructor(props: IProfileProps) {
     super(props);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
-  readonly state: State = {
+  readonly state: IProfileState = {
     isOpen: false,
     value: ""
   };
@@ -59,35 +39,27 @@ export class Profile extends React.Component<Props, State> {
     this.setState({ isOpen: false });
   }
 
-  // handleChange(event: KeyboardEvent) {
-  //   this.setState({value: event.target.value });
-  // }
-
-  // handleSubmit(event: MouseEvent | null) {
-  //   alert('A name was submitted: ' + this.state.value);
-  //   event.preventDefault();
-  // }
-
   render() {
     const fields: IFields = {
       name: {
         id: "name",
-        label: "Name"
+        label: "Name",
+        validation: { rule: required }
       },
-      email: {
-        id: "email",
-        label: "Email"
+      accountNumber: {
+        id: "accountNumber",
+        label: "Account Number",
+        // validation: { rule: isEmail }
       },
-      reason: {
-        id: "reason",
-        label: "Reason",
-        editor: "dropdown",
-        options: ["", "Marketing", "Support", "Feedback", "Jobs"]
+      accountNumber2: {
+        id: "accountNumber2",
+        label: "Confirm Account Number",
+        // validation: { rule: isEmail }
       },
-      notes: {
-        id: "notes",
-        label: "Notes",
-        editor: "multilinetextbox"
+      routingNumber: {
+        id: "routingNumber",
+        label: "Routing Number",
+        // validation: { rule: required }
       }
     };
 
@@ -96,41 +68,22 @@ export class Profile extends React.Component<Props, State> {
         <button onClick={this.openModal}>open</button>
         <Modal isOpen={this.state.isOpen}>
           <div>
-            <div>I am a modal</div>
-            <form>
-              <input />
-              <button>tab navigation</button>
-              <button>stays</button>
-              <button>inside</button>
-              <button>the modal</button>
-            </form>
+            <button className="AcctModal__CloseButton" onClick={this.closeModal}>X</button>
             <Form
-              action="hey"
+              apiPath="hey"
               fields={fields}
               render={() => (
                 <React.Fragment>
-                  <div className="alert alert-info" role="alert">
-                    Enter the information below and we'll get back to you as
-                    soon as we can.
+                  <div className="AcctModal__Form" role="alert">
+                    Please enter the account information.
                   </div>
                   <Field {...fields.name} />
-                  <Field {...fields.email} />
-                  <Field {...fields.reason} />
-                  <Field {...fields.notes} />
+                  <Field {...fields.accountNumber} />
+                  <Field {...fields.accountNumber2} />
+                  <Field {...fields.routingNumber} />
                 </React.Fragment>
               )}
             />
-            {/* <form onSubmit={this.handleSubmit}>
-              <label>
-                Name:
-                <input
-                  type="text"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <input type="submit" value="Submit" />
-            </form> */}
           </div>
         </Modal>
       </React.Fragment>

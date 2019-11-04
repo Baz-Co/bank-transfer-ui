@@ -1,0 +1,10 @@
+.AcctModal__CloseButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.AcctModal__Form {
+  margin: calc(3 * var(--base-px)) 0;
+  font-weight: bold;
+}

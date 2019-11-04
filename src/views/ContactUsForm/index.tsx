@@ -1,6 +1,8 @@
 import * as React from "react";
-import { Form, IFields, required, isEmail, maxLength } from "../../components/Form";
+import { Form, required, maxLength } from "../../components/Form";
 import { Field } from "../../components/Field";
+import { IFields } from "../../types";
+
 
 export const ContactUsForm: React.SFC = () => {
   const fields: IFields = {
@@ -11,26 +13,25 @@ export const ContactUsForm: React.SFC = () => {
     },
     email: {
       id: "email",
-      label: "Email",
-      validation: { rule: isEmail }
+      label: "Email"
     },
-    reason: {
-      id: "reason",
-      label: "Reason",
-      editor: "dropdown",
-      options: ["", "Marketing", "Support", "Feedback", "Jobs"],
-      validation: { rule: required }
-    },
-    notes: {
-      id: "notes",
-      label: "Notes",
-      editor: "multilinetextbox",
-      validation: { rule: maxLength, args: 1000 }
-    }
+    // reason: {
+    //   id: "reason",
+    //   label: "Reason",
+    //   editor: "dropdown",
+    //   options: ["", "Marketing", "Support", "Feedback", "Jobs"],
+    //   validation: { rule: required }
+    // },
+    // notes: {
+    //   id: "notes",
+    //   label: "Notes",
+    //   editor: "textarea",
+    //   validation: { rule: maxLength, args: 1000 }
+    // }
   };
   return (
     <Form
-      action="http://localhost:4351/api/contactus"
+      apiPath="http://localhost:4351/api/contactus"
       fields={fields}
       render={() => (
         <React.Fragment>

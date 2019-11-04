@@ -1,54 +1,22 @@
 import * as React from "react";
 
-import { IErrors, IValues, IFormContext, FormContext } from "../Form";
+import { Label } from "../Label";
+import { Input } from "../Input";
+import { IFormContext, FormContext } from "../Form";
 
-/* The available editors for the field */
-type Editor = "textbox" | "multilinetextbox" | "dropdown";
+import './Field.css'
 
-export interface IValidation {
-  rule: (values: IValues, fieldName: string, args: any) => string;
-  args?: any;
-}
+import { IFieldProps, IErrors } from "../../types";
 
-export interface IFieldProps {
-  /* The unique field name */
-  id: string;
-
-  /* The label text for the field */
-  label?: string;
-
-  /* The editor for the field */
-  editor?: Editor;
-
-  /* The drop down items for the field */
-  options?: string[];
-
-  /* The field value */
-  value?: any;
-
-  /* The field validator function and argument */
-  validation?: IValidation;
-}
-
-export const Field: React.SFC<IFieldProps> = ({
+export const Field: React.FC<IFieldProps> = ({
   id,
   label,
   editor,
   options,
   value
 }) => {
-  /**
-   * Gets the validation error for the field
-   * @param {IErrors} errors - All the errors from the form
-   * @returns {string[]} - The validation error
-   */
   const getError = (errors: IErrors): string => (errors ? errors[id] : "");
 
-  /**
-   * Gets the inline styles for editor
-   * @param {IErrors} errors - All the errors from the form
-   * @returns {any} - The style object
-   */
   const getEditorStyle = (errors: IErrors): any =>
     getError(errors) ? { borderColor: "red" } : {};
 
@@ -56,10 +24,10 @@ export const Field: React.SFC<IFieldProps> = ({
     <FormContext.Consumer>
       {(context: IFormContext) => (
         <div className="form-group">
-          {label && <label htmlFor={id}>{label}</label>}
+          {label && <Label htmlFor={id}>{label}</Label>}
 
-          {editor!.toLowerCase() === "textbox" && (
-            <input
+          {editor!.toLowerCase() === "input" && (
+            <Input
               id={id}
               type="text"
               value={value}
@@ -72,7 +40,7 @@ export const Field: React.SFC<IFieldProps> = ({
             />
           )}
 
-          {editor!.toLowerCase() === "multilinetextbox" && (
+          {editor!.toLowerCase() === "textarea" && (
             <textarea
               id={id}
               value={value}
@@ -108,7 +76,7 @@ export const Field: React.SFC<IFieldProps> = ({
 
           {getError(context.errors) && (
             <div style={{ color: "red", fontSize: "80%" }}>
-              <p>{getError(context.errors)}</p>
+              {getError(context.errors)}
             </div>
           )}
         </div>
@@ -117,5 +85,5 @@ export const Field: React.SFC<IFieldProps> = ({
   );
 };
 Field.defaultProps = {
-  editor: "textbox"
+  editor: "input"
 };
