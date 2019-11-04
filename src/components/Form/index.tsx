@@ -66,7 +66,6 @@ export class Form extends React.Component<IFormProps, IFormState> {
         this.props.fields[fieldName].validation!.args
       );
     }
-    this.state.errors[fieldName] = newError;
     this.setState({
       errors: { ...this.state.errors, [fieldName]: newError }
     });
@@ -75,7 +74,7 @@ export class Form extends React.Component<IFormProps, IFormState> {
 
   private haveErrors(errors: IErrors) {
     let haveError: boolean = false;
-    Object.keys(errors).map((key: string) => {
+    Object.keys(errors).forEach((key: string) => {
       if (errors[key].length > 0) {
         haveError = true;
       }
@@ -98,7 +97,7 @@ export class Form extends React.Component<IFormProps, IFormState> {
 
   private validateForm(): boolean {
     const errors: IErrors = {};
-    Object.keys(this.props.fields).map((fieldName: string) => {
+    Object.keys(this.props.fields).forEach((fieldName: string) => {
       errors[fieldName] = this.validate(fieldName);
     });
     this.setState({ errors });
@@ -119,7 +118,7 @@ export class Form extends React.Component<IFormProps, IFormState> {
         let responseBody: any;
         responseBody = await response.json();
         const errors: IErrors = {};
-        Object.keys(responseBody).map((key: string) => {
+        Object.keys(responseBody).forEach((key: string) => {
           // For ASP.NET core, the field names are in title case - so convert to camel case
           const fieldName = key.charAt(0).toLowerCase() + key.substring(1);
           errors[fieldName] = responseBody[key];

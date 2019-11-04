@@ -67,7 +67,7 @@ export class Transfers extends Component<ITransfersProps, ITransfersState> {
   };
 
   render() {
-    const { accounts, externalAccounts, amount } = this.state;
+    const { accounts, externalAccounts } = this.state;
 
     const fields: IFields = {
       selectedTransfererAccount: {

@@ -3,8 +3,7 @@ import React from "react";
 import Modal from "../../components/Modal";
 import {
   Form,
-  required,
-  maxLength
+  required
 } from "../../components/Form";
 import { Field } from "../../components/Field";
 
