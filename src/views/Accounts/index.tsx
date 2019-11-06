@@ -40,7 +40,8 @@ export class Accounts extends Component<IProps, IState> {
       this.setState({
         selectedAccount: item,
         availableBalance: null,
-        presentBalance: null
+        presentBalance: null,
+        transactions: []
       }, () => {
         fetch("https://fathomless-tundra-18251.herokuapp.com/transactions")
         .then((res) => { return res.json() })
