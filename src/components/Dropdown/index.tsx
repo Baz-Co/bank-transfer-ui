@@ -15,7 +15,10 @@ type IProps = {
   onBlur?: () => void
 }
 
-export const Dropdown: React.FC<IProps> = ({ label, onChange, items, onBlur }) => { 
+export const Dropdown: React.FC<IProps> = ({ label, onChange, items, onBlur }) => {
+  // const clearInputOnFocus = (): string => {
+  //   return 
+  // }
   return (
     <Downshift
       onChange={onChange}
@@ -29,19 +32,24 @@ export const Dropdown: React.FC<IProps> = ({ label, onChange, items, onBlur }) =
         isOpen,
         inputValue,
         highlightedIndex,
+        clearSelection,
         selectedItem,
         openMenu
       }) => (
         <div>
           <Label {...getLabelProps()} text={label} />
-          <Input
-            {...getInputProps()}
-            className="Dropdown__input"
-            placeholder="Select an Account"
-            onFocus={()=>{openMenu()}}
-            style={{padding: '5px', width: '100%'}}
-            onBlur={onBlur}
-          />
+          <div className="Dropdown__Element">
+            <Input
+              {...getInputProps()}
+              className="Dropdown__input"
+              placeholder="Select an Account"
+              onFocus={()=>{openMenu()}}
+              style={{padding: '5px', width: '100%'}}
+              onBlur={onBlur}
+              icon={selectedItem && <button onClick={() => clearSelection()}>X</button>}
+            />
+            
+          </div>
           <div className="Dropdown__Panel">
             <ul {...getMenuProps()} style={{width: '100%'}}>
               {isOpen && items

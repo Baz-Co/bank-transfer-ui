@@ -10,6 +10,7 @@ export const columnDefinitions = [
   {
     Header: 'Type',
     accessor: 'type',
+    width: 150
   },
   {
     Header: 'Amount',
@@ -19,5 +20,9 @@ export const columnDefinitions = [
     Header: 'Balance',
     accessor: 'balance',
     sortable: false
+  },
+  {
+    Header: 'Account',
+    accessor: 'account'
   }
 ]

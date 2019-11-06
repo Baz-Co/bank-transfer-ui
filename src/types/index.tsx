@@ -4,7 +4,8 @@ export interface IAccounts {
   accountNumber: number
   routingNumber: number
   balance: number
-  createDate?: string
+  available?: number
+  createDate?: string,
 }
 
 export interface ITransactions {
@@ -14,6 +15,7 @@ export interface ITransactions {
   type: string
   amount: number
   balance: number
+  account: number
 }
 
 export interface IValues {

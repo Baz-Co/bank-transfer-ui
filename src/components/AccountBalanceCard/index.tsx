@@ -6,10 +6,16 @@ interface IProps {
 }
 
 export const AccountBalanceCard: React.FC<IProps> = ({ title, balance }) => {
+  let cardBalance = null;
+  if(balance || balance === 0) {
+    cardBalance = balance
+  } else {
+    cardBalance = "--"
+  }
   return (
     <div className="card">
       <h4>{title}</h4>
-      <p>{balance || "--"}</p>
+      <p>{cardBalance}</p>
     </div>
   );
 };

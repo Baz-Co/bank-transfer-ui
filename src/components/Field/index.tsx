@@ -35,7 +35,6 @@ export const Field: React.FC<IFieldProps> = ({
               onChange={(e: React.FormEvent<HTMLInputElement>) =>
                 context.setValues({ [id]: e.currentTarget.value })
               }
-              // onBlur={() => console.log('blurred')}
               onBlur={() => context.validate(id)}
               className="form-control"
               style={getEditorStyle(context.errors)}
