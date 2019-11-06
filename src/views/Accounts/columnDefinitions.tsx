@@ -15,14 +15,10 @@ export const columnDefinitions = [
   {
     Header: 'Amount',
     accessor: 'amount',
-  },
-  {
-    Header: 'Balance',
-    accessor: 'balance',
-    sortable: false
-  },
-  {
-    Header: 'Account',
-    accessor: 'account'
   }
+  // {
+  //   Header: 'Balance',
+  //   accessor: 'balance',
+  //   sortable: false
+  // }
 ]

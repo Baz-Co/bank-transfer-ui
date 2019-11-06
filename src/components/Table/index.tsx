@@ -19,6 +19,12 @@ export const Table: React.FC<Props> = ({ columns, data }) => {
         data={data}
         defaultPageSize={5}
         noDataText={'No transactions associated with this account were found.'}
+        defaultSorted={[
+          {
+            id: "date",
+            desc: true
+          }
+        ]}
       />
     </div>
   )
